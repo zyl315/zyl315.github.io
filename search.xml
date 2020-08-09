@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hexo常用命令</title>
+    <url>/2020/08/09/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<blockquote>
+<h3 id="Hexo常用的几个命令"><a href="#Hexo常用的几个命令" class="headerlink" title="Hexo常用的几个命令"></a>Hexo常用的几个命令</h3><h4 id="1-hexo-server"><a href="#1-hexo-server" class="headerlink" title="1. hexo server"></a>1. hexo server</h4><p><code>hexo server</code> ，可简写为 <code>hexo s</code>，启动本地服务器预览，默认地址为<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></p>
+<h4 id="2-hexo-new"><a href="#2-hexo-new" class="headerlink" title="2. hexo new"></a>2. hexo new</h4><p><code>hexo new</code> 创建一篇新的文章，后接文章名。</p>
+<h4 id="3-hexo-generate"><a href="#3-hexo-generate" class="headerlink" title="3. hexo generate"></a>3. hexo generate</h4><p><code>hexo generate</code>，可简写为<code>hexo g</code>，生成静态文件。</p>
+<h4 id="4-hexo-clean"><a href="#4-hexo-clean" class="headerlink" title="4. hexo clean"></a>4. hexo clean</h4><p><code>hexo clean</code> 清除缓存文件 (db.json) 和已生成的静态文件 (public)。</p>
+<h4 id="5-hexo-deploy"><a href="#5-hexo-deploy" class="headerlink" title="5. hexo deploy"></a>5. hexo deploy</h4><p><code>hexo deploy</code> ，可简写为<code>hexo d</code>，文件生成后立即部署网站</p>
+</blockquote>
+<blockquote>
+<p>详细可访问<a href="https://hexo.io/zh-cn/docs/commands" target="_blank" rel="noopener">Hexo</a>官网查看更多命令。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2020/03/07/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
