@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>CSS3 动画</title>
-    <url>/2020/08/11/CSS%20animate/</url>
+    <url>/2020/08/11/CSS-animate/</url>
     <content><![CDATA[<h5 id="1-transform"><a href="#1-transform" class="headerlink" title="1 transform"></a>1 transform</h5><p><a href="https://www.w3school.com.cn/cssref/pr_transform.asp" target="_blank" rel="noopener">transform</a> 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜<br>例如：旋转 div 元素：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">div</span><br><span class="line">&#123;</span><br><span class="line">transform:rotate(7deg);</span><br><span class="line">-ms-transform:rotate(7deg); 	/* IE 9 */</span><br><span class="line">-moz-transform:rotate(7deg); 	/* Firefox */</span><br><span class="line">-webkit-transform:rotate(7deg); /* Safari 和 Chrome */</span><br><span class="line">-o-transform:rotate(7deg); 	/* Opera */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
