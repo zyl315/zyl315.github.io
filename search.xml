@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>跳转测试</title>
+    <url>/2020/09/26/%E5%86%85%E9%83%A8%E7%BD%91%E9%A1%B5%E8%B7%B3%E8%BD%AC%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<p><a href="/demo/mobile">慕课手机</a></p>
+<p><a href="/demo/live2d">live2D</a></p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>第一次使用Markdown编辑器</title>
+    <url>/2020/09/14/WebAPP/</url>
+    <content><![CDATA[<h2 id="Web-App-开发相关知识"><a href="#Web-App-开发相关知识" class="headerlink" title="Web App 开发相关知识"></a>Web App 开发相关知识</h2><h4 id="物理像素与CSS像素"><a href="#物理像素与CSS像素" class="headerlink" title="物理像素与CSS像素"></a>物理像素与CSS像素</h4><blockquote>
+<p>物理像素(physical pixel ),也可叫做设备像素(dp : device pixel)，与设备的物理特性相关，例如屏幕的分辨率，屏幕大小有关。</p>
+</blockquote>
+<blockquote>
+<p>CSS像素，也可以叫做逻辑像素(logic pixel)，或者设备独立像素(device independent pixel)，实际开发中使用的就是CSS像素。</p>
+</blockquote>
+<blockquote>
+<p>设备像素比(dpr : device pixel ratio), dpr=设备像素/CSS 像素（缩放比是1的情况下）。dpr=1为标清屏，dpr&gt;=2为高清屏。缩放是改变CSS像素。</p>
+</blockquote>
+<blockquote>
+<p>PPI(pixels per inch), 每英寸的物理像素点，也可以叫做dpi (dots per inch)。</p>
+</blockquote>
+<h4 id="viewport常用写法"><a href="#viewport常用写法" class="headerlink" title="viewport常用写法"></a>viewport常用写法</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, inital-scale=1, user-scalacle=no, maximum-scale=1, minimum-scale=1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>width=device-width</code>与<code>inital-scale=1</code>实现的效果相同，是的网页在移动端可以正常显示大小，<code>user-scalacle=no</code>与<code>maximum-scale=1,mimimum-scale=1</code>使得用户不能够缩放网页，以免影响布局效果。</p>
+]]></content>
+      <categories>
+        <category>WebApp</category>
+      </categories>
+      <tags>
+        <tag>pixel viewport</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS3 动画</title>
     <url>/2020/08/11/CSS-animate/</url>
     <content><![CDATA[<h5 id="1-transform"><a href="#1-transform" class="headerlink" title="1 transform"></a>1 transform</h5><p><a href="https://www.w3school.com.cn/cssref/pr_transform.asp" target="_blank" rel="noopener">transform</a> 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜<br>例如：旋转 div 元素：</p>
