@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    跳转测试 |  zyl&#39;s blog
+    Git的知识点 |  zyl&#39;s blog
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -30,7 +30,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-内部网页跳转测试" class="article article-type-post" itemscope
+  <article id="post-Git的知识点" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -38,7 +38,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  跳转测试
+  Git的知识点
 </h1>
   
 
@@ -47,12 +47,12 @@
 
     
     <div class="article-meta">
-      <a href="/2020/09/26/%E5%86%85%E9%83%A8%E7%BD%91%E9%A1%B5%E8%B7%B3%E8%BD%AC%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2020-09-26T11:17:58.538Z" itemprop="datePublished">2020-09-26</time>
+      <a href="/2020/09/26/Git%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
+  <time datetime="2020-09-26T12:37:26.942Z" itemprop="datePublished">2020-09-26</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a>
+    <a class="article-category-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7/">版本控制工具</a> / <a class="article-category-link" href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7/Git/">Git</a>
   </div>
 
       
@@ -62,7 +62,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5字</span>
+            <span class="post-count">1.6k字</span>
         </span>
     </span>
 
@@ -71,7 +71,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
+            <span class="post-count">6分钟</span>
         </span>
     </span>
 </div>
@@ -82,6 +82,8 @@
 
     
     
+    <div class="tocbot"></div>
+
 
 
 
@@ -96,8 +98,82 @@
       
 
       
-      <p><a href="/demo/mobile">慕课手机</a></p>
-<p><a href="/demo/live2d">live2D</a></p>
+      <p>可以查看张雪峰关于git的介绍，<a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">地址</a></p>
+<h5 id="1-创建git版本库"><a href="#1-创建git版本库" class="headerlink" title="1. 创建git版本库"></a>1. 创建git版本库</h5><p><code>git init</code>   把当前目录变成git可以管理的仓库。</p>
+<p><code>git add 1.txt</code>把1.txt这个文件添加到git仓库，一定要在仓库所在的目录下哟！</p>
+<p><code>git commit -m &quot;add a file&quot;</code>  把文件提交到仓库，-m 后面输入的是本次提交的说明，可以添加多个后一次性提交。 </p>
+<h5 id="2-版本控制"><a href="#2-版本控制" class="headerlink" title="2. 版本控制"></a>2. 版本控制</h5><p><code>git log</code> 查看最近的提交历史的操作记录，由最近到最远排序， 添加<code>--pretty=oneline</code>可以简化查询信息。</p>
+<p><code>git reset --hard HEAD^</code>  回退到上一个版本，<code>HEAD</code>是一个指针，指向当前版本，<code>HEAD^</code>表示上一个版本，<code>HEAD^^</code>表示上上个版本， <code>HEAD~100</code>表示上100个版本，可以确定要回退的版本。</p>
+<p><code>git reflog</code> 查看操作命令历史，然后使用<code>git reset --hard commit_id</code>回到未来的版本。</p>
+<p><code>git status</code> 可以查看当前工作区与暂存区文件提交的状态。</p>
+<h5 id="3-工作区与缓存区"><a href="#3-工作区与缓存区" class="headerlink" title="3.工作区与缓存区"></a>3.工作区与缓存区</h5><p><img src="https://www.liaoxuefeng.com/files/attachments/919020037470528/0" alt="img"></p>
+<p>使用<code>git add</code>实际上是把文件从工作区添加到暂存区；</p>
+<p>使用<code>git commit</code>提交更改，实际上是把暂存区的内容提交到<code>master</code>分支，当我们在创建git版本仓库时，会自动创建一个唯一的<code>master</code>分支。</p>
+<p>在每一次对工作区的文件进行修改后，先<code>git add</code>添加到缓存区，然后在<code>git commit</code> 提交到分支，这样才能实现对版本库里的文件进行更新。</p>
+<h5 id="4-仓库文件管理"><a href="#4-仓库文件管理" class="headerlink" title="4.仓库文件管理"></a>4.仓库文件管理</h5><h6 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h6><blockquote>
+<p><code>git diff Head -- file</code>当前工作区的与版本库里文件的差别。</p>
+</blockquote>
+<h6 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h6><blockquote>
+<p><code>git checkout -- file</code>可以丢弃工作区的修改，即让这个文件回到<code>git commit</code>或者&gt;<code>git add</code>时的状态，<strong>注意，其中的<code>--</code>十分重要，如果去掉就是切换分支的命令了</strong>。</p>
+<p>如果文件已经提交到了暂存区<code>git add</code>，想丢弃修改，首先使用<code>git reset Head &gt;&lt;file&gt;</code>命令，然后再使用<code>git checkour -- file</code>。</p>
+<p>如果文件已经提交到了版本库里，要撤销本次提交，可以使用版本回退。</p>
+</blockquote>
+<h6 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h6><blockquote>
+<p>可以使用Linux命令<code>rm file</code>或者直接在文件管理器中直接把文件删除了，也可以使用命令<code>git rm file</code>.</p>
+</blockquote>
+<h5 id="5-远程仓库"><a href="#5-远程仓库" class="headerlink" title="5.远程仓库"></a>5.远程仓库</h5><h6 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h6><blockquote>
+<p><code>git remote add origin &gt;git@github.com:username/***.git</code>关联远程仓库,其中username是自己的github用户名，***为仓库名，可以在GitHub上等代码托管网站自己建立远程仓库。</p>
+<p><code>git push -u origin master</code>第一次推送master分支的所有内容。</p>
+<p><code>git push origin master</code> 第一次提交后，推送新的修改版本。</p>
+<p>其中需要注意SSH有关方面的配置。</p>
+</blockquote>
+<p>克隆远程仓库</p>
+<blockquote>
+<p><code>git clone</code>,使用克隆命令，后面可以接仓库的https或SSH地址，例如：<code>git clone git@github.com:username/***.git</code>。</p>
+</blockquote>
+<h5 id="6-分支管理"><a href="#6-分支管理" class="headerlink" title="6.分支管理"></a>6.分支管理</h5><h6 id="创建与合并分支"><a href="#创建与合并分支" class="headerlink" title="创建与合并分支"></a>创建与合并分支</h6><blockquote>
+<p><code>git branch</code>，查看当前分支。</p>
+<p><code>git checkoout -b &lt;name&gt;</code>，表示创建分支并切换。</p>
+<p>可以等价为两条语句:<code>git branch &lt;name&gt;</code>和<code>git checkout &lt;name&gt;</code>。</p>
+<p><code>git checkout &lt;name&gt;</code> ，用来切换分支，但容易与<code>git chechout -- &lt;file&gt;</code>撤销修改命令混淆，最新版的Git可也以使用新的切换分支命令：</p>
+<p><code>git switch &lt;name&gt;</code>来切换分支，但Git版本须2.23版本以上，可以使用<code>git update-git-for-windows</code>来更新,速度太慢不推荐。</p>
+<p><code>git merge &lt;name&gt;</code>，用于合并指定分支到当前分支。</p>
+<p><code>git branch -d &lt;name&gt;</code>, 删除分支。</p>
+</blockquote>
+<h6 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h6><blockquote>
+<p>当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。</p>
+<p>解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。</p>
+<p><code>git log --graph</code>命令可以看到分支合并图。</p>
+</blockquote>
+<h6 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h6><blockquote>
+<p>在分支合并时，大对数情况下采用的是<code>Fast forward</code>模式，在这种模式下，分支删除后就会丢失分支信息，可以采用</p>
+<p><code>git merge --no--ff -m &quot;message&quot; &lt;name&gt;</code>, 这种方式会提交一个commit，合并后就会有历史分支，能看出来曾经做过的合并。</p>
+<p><img src="https://www.liaoxuefeng.com/files/attachments/919023260793600/0" alt="img"></p>
+<p>在实际开发过程中，master分支非常稳定，一般仅用来发布新版本，团队成员的开发一般会推送到dev分支等。</p>
+</blockquote>
+<h6 id="Bug分支"><a href="#Bug分支" class="headerlink" title="Bug分支"></a>Bug分支</h6><blockquote>
+<p>Bug分支，顾名思义为了修复Bug而创建的分支，而当目前的工作还未还未完成，不能提交现在正在工作的分支，可以使用Git的<code>git stash</code>功能，可以把当前的工作现场“保存”下来，等到恢复现场后继续工作。</p>
+<p><code>git stash lsit</code> 查看工作现场，恢复工作现场的办法有两个：</p>
+<p><code>git stash apply</code> 恢复现场但不删除stash内容，<code>git stash drop</code>来删除stash中的内容。</p>
+<p><code>git stash pop</code>可以回到工作现场，恢复的同时把stash内容删除。</p>
+<p>当个多个分支上存在bug时，可以使用命令<code>git cherry-pick &lt;commit_id&gt;</code>，把bug提交到修改“复制”</p>
+<p>到当前分支，避免重复劳动。</p>
+</blockquote>
+<h6 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a>Feature分支</h6><blockquote>
+<p>开发一个新的功能，最好是新建一个分支，如果丢弃一个没有被合并的分支，可以使用命令</p>
+<p><code>git branch -d &lt;name&gt;</code>强行删除。</p>
+</blockquote>
+<h6 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h6><blockquote>
+<p>从远程仓库克隆时，实际上是对应本地master分支与远程仓库的master分支，远程仓库的默认名是origin。</p>
+<p><code>git remote</code>，查看远程仓库信息。<br>推送分支:<br><code>git push origin &lt;branch_name&gt;</code>，在推送中可能出现失败，本地提交有冲突，先使用<code>git pull</code>从远程仓库拉取最新的提交，然后在本地解决冲突，再推送。</p>
+</blockquote>
+<h6 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h6><blockquote>
+<p><code>git rebase</code>可以把本地未push的分叉提交历史整理成直线，可以使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。</p>
+</blockquote>
+<h5 id="7-标签管理"><a href="#7-标签管理" class="headerlink" title="7.标签管理"></a>7.标签管理</h5><p>标签可以使得查找commit更加容易，不在需要记得commit id，tag与某个commit绑定。</p>
+<p><code>git tag &lt;tagname&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；</p>
+<p><code>git tag -a &lt;tagname&gt; -m &quot;***&quot;</code>可以指定标签信息；</p>
+<p><code>git tag</code>可以查看所有标签。</p>
 
       
       <!-- reward -->
@@ -163,13 +239,15 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://zyl315.gitee.io/blog/2020/09/26/%E5%86%85%E9%83%A8%E7%BD%91%E9%A1%B5%E8%B7%B3%E8%BD%AC%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://zyl315.gitee.io/blog/2020/09/26/Git%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a></li></ul>
+
 
     </footer>
 
@@ -179,19 +257,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/09/26/Git%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Git的知识点
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/09/14/WebAPP/" class="article-nav-link">
+      <a href="/2020/09/26/%E5%86%85%E9%83%A8%E7%BD%91%E9%A1%B5%E8%B7%B3%E8%BD%AC%E6%B5%8B%E8%AF%95/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">WebAPP</div>
+        <div class="article-nav-title">跳转测试</div>
       </a>
     
   </nav>
