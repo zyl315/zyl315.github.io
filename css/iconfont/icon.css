@@ -15,6 +15,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-CN_acfuntv {
+	display:inline-block;
+	transition: transform .3s;
+}
+
 .icon-CN_acfuntv:before {
   content: "\e68e";
 }
+
+.icon-CN_acfuntv:hover {
+	transform:rotate(180dge);
+	-webkit-transform:rotate(180deg);
+}
+

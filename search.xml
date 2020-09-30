@@ -11,7 +11,7 @@
 <p><code>git reset --hard HEAD^</code>  回退到上一个版本，<code>HEAD</code>是一个指针，指向当前版本，<code>HEAD^</code>表示上一个版本，<code>HEAD^^</code>表示上上个版本， <code>HEAD~100</code>表示上100个版本，可以确定要回退的版本。</p>
 <p><code>git reflog</code> 查看操作命令历史，然后使用<code>git reset --hard commit_id</code>回到未来的版本。</p>
 <p><code>git status</code> 可以查看当前工作区与暂存区文件提交的状态。</p>
-<h5 id="3-工作区与缓存区"><a href="#3-工作区与缓存区" class="headerlink" title="3.工作区与缓存区"></a>3.工作区与缓存区</h5><p><img src="https://www.liaoxuefeng.com/files/attachments/919020037470528/0" alt="img"></p>
+<h5 id="3-工作区与缓存区"><a href="#3-工作区与缓存区" class="headerlink" title="3.工作区与缓存区"></a>3.工作区与缓存区</h5><p><img src= "/img/loading.gif" data-lazy-src="https://www.liaoxuefeng.com/files/attachments/919020037470528/0" alt="img"></p>
 <p>使用<code>git add</code>实际上是把文件从工作区添加到暂存区；</p>
 <p>使用<code>git commit</code>提交更改，实际上是把暂存区的内容提交到<code>master</code>分支，当我们在创建git版本仓库时，会自动创建一个唯一的<code>master</code>分支。</p>
 <p>在每一次对工作区的文件进行修改后，先<code>git add</code>添加到缓存区，然后在<code>git commit</code> 提交到分支，这样才能实现对版本库里的文件进行更新。</p>
@@ -53,7 +53,7 @@
 <h6 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h6><blockquote>
 <p>在分支合并时，大对数情况下采用的是<code>Fast forward</code>模式，在这种模式下，分支删除后就会丢失分支信息，可以采用</p>
 <p><code>git merge --no--ff -m &quot;message&quot; &lt;name&gt;</code>, 这种方式会提交一个commit，合并后就会有历史分支，能看出来曾经做过的合并。</p>
-<p><img src="https://www.liaoxuefeng.com/files/attachments/919023260793600/0" alt="img"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://www.liaoxuefeng.com/files/attachments/919023260793600/0" alt="img"></p>
 <p>在实际开发过程中，master分支非常稳定，一般仅用来发布新版本，团队成员的开发一般会推送到dev分支等。</p>
 </blockquote>
 <h6 id="Bug分支"><a href="#Bug分支" class="headerlink" title="Bug分支"></a>Bug分支</h6><blockquote>
@@ -82,7 +82,6 @@
 ]]></content>
       <categories>
         <category>版本控制工具</category>
-        <category>Git</category>
       </categories>
       <tags>
         <tag>Git</tag>
@@ -176,9 +175,9 @@
 <p>我的blog地址：<a href="https://www.zyl315.com" target="_blank" rel="noopener">https://www.zyl315.com</a></p>
 <p><a href="http://www.zyl315.com" target="_blank" rel="noopener">blog</a></p>
 <p>|  姓名  |年龄| 班级 |<br>|—-|–|–|–|<br>|  Jack  |  20  | 1601 |<br>|  Army  |  21  | 1602 |</p>
-<h6 id="使用jsDelivr-GitHub-CND加速的图床例子"><a href="#使用jsDelivr-GitHub-CND加速的图床例子" class="headerlink" title="使用jsDelivr+GitHub CND加速的图床例子"></a>使用jsDelivr+GitHub CND加速的图床例子</h6><img src="https://cdn.jsdelivr.net/gh/zyl315/CDN/img/desk.jpg" title="例子" style="zoom:25%;" />
+<h6 id="使用jsDelivr-GitHub-CND加速的图床例子"><a href="#使用jsDelivr-GitHub-CND加速的图床例子" class="headerlink" title="使用jsDelivr+GitHub CND加速的图床例子"></a>使用jsDelivr+GitHub CND加速的图床例子</h6><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/zyl315/CDN/img/desk.jpg" title="例子" style="zoom:25%;" />
 
-<img src="https://cdn.jsdelivr.net/gh/zyl315/CDN/img/(0).jpg.webp" style="zoom: 25%;" />
+<img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/zyl315/CDN/img/(0).jpg.webp" style="zoom: 25%;" />
 
 
 
