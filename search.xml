@@ -111,11 +111,11 @@
 <p>设备像素比(dpr : device pixel ratio), dpr=设备像素/CSS 像素（缩放比是1的情况下）。dpr=1为标清屏，dpr&gt;=2为高清屏。缩放是改变CSS像素。</p>
 </blockquote>
 <blockquote>
-<p>PPI(pixels per inch), 每英寸的物理像素点，也可以叫做dpi (dots per inch)。</p>
+<p>PPI(pixels per inch), 每英寸的物理像素点i，也可以叫做dpi (dots per inch)。</p>
 </blockquote>
-<h4 id="viewport常用写法"><a href="#viewport常用写法" class="headerlink" title="viewport常用写法"></a>viewport常用写法</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, inital-scale=1, user-scalacle=no, maximum-scale=1, minimum-scale=1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="viewport常用写法"><a href="#viewport常用写法" class="headerlink" title="viewport常用写法"></a>viewport常用写法</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>其中<code>width=device-width</code>与<code>inital-scale=1</code>实现的效果相同，是的网页在移动端可以正常显示大小，<code>user-scalacle=no</code>与<code>maximum-scale=1,mimimum-scale=1</code>使得用户不能够缩放网页，以免影响布局效果。</p>
+<p>其中<code>width=device-width</code>与<code>initial-scale=1</code>实现的效果相同，是的网页在移动端可以正常显示大小，<code>user-scalable=no</code>与<code>maximum-scale=1,mimimum-scale=1</code>使得用户不能够缩放网页，以免影响布局效果。</p>
 ]]></content>
       <categories>
         <category>WebApp</category>
