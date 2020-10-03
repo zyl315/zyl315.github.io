@@ -1,3 +1,6 @@
+var message_Path = './live2d/'
+var home_Path = './live2d/'
+
 function renderTip(template, context) {
     var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
     return template.replace(tokenReg, function (word, slash1, token, slash2) {
@@ -20,12 +23,13 @@ String.prototype.renderTip = function (context) {
     return renderTip(this, context);
 };
 
-var re = /x/;
-console.log(re);
-re.toString = function () {
+function openConsole(){}
+openConsole.toString = function () {
     showMessage('哈哈，你打开了控制台，是想要看看我的秘密吗？', 5000);
     return '';
 };
+console.log(openConsole);
+
 
 $(document).on('copy', function () {
     showMessage('你都复制了些什么呀，转载要记得加上出处哦~~', 5000);

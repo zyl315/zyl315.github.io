@@ -1,4 +1,11 @@
 {
-    "Potion Maker": ["Pio", "tia"],
-    "Miku":["miku"]
+    "Pio": "pio",
+    "Tia": "tia",
+    "Miku": "miku",
+    "Doma Umaru": "umaru",
+    "Shiina Mashiro": "mashiro_seifuku",
+    "Nero Claudius":"nero",
+    "Violet Evergarden":"violet",
+    "Tamamo no Mae":"tamamo",
+    "Noire": "noireswim"
 }

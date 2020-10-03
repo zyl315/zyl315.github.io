@@ -4,33 +4,29 @@ function loadAllLive2dCharacter() {
         url: "./live2d/json/character.json",
         dataType: "JSON",
         success: function (result) {
-            console.log(result);
-
+            initData(result)
         }
     });
 }
 
-
-function initElementUI() {
+function initData(character) {
+    var character_name = [];
+    for (let name in character) {
+        character_name.push(name);
+    }
     var app = new Vue({
         el: "#app",
         data: {
-            items: ["Pio", "tia", "miku"]
+            items: character_name
         },
         methods: {
             loadCharacter: function (event) {
                 var name = event.currentTarget;
-                loadlive2d("live2d-model", "./live2d/model/" + name.innerHTML + "/model.json");
+                loadlive2d("live2d-model", "./live2d/model/" + character[name.innerHTML] + "/model.json");
             }
         }
     })
+    loadlive2d("live2d-model", "./live2d/model/" + character[character_name[0]] + "/model.json");
 }
 
-function init() {
-    loadAllLive2dCharacter();
-    initElementUI();
-    loadlive2d("live2d-model", "./live2d/model/" + "Pio" + "/model.json");
-}
-
-
-init()
+loadAllLive2dCharacter()

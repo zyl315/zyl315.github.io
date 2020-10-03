@@ -6,10 +6,10 @@
     <title>Live2D！</title>
     <link rel="stylesheet" href="live2d/css/live2d.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css"> -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+    <!-- <script type="text/javascript" src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script> -->
 </head>
 
 <body>
@@ -25,31 +25,18 @@
                         p-id="3980" fill="#bfbfbf"></path>
                 </svg>
             </div>
-            <div class="switch-button" id="switch" onclick="switchModel()">switch</div>
+            <!-- <div class="switch-button" id="switch" onclick="switchModel()">switch</div> -->
         </div>
         <div class="character">
             <button  plain v-for="item in items" class="tag-button"  @click="loadCharacter($event)">{{item}}</button>
         </div>
     </div>
 </body>
-<script>
-    var message_Path = 'live2d/'
-    var home_Path = 'https://localhost:4000/demo/live2d/'
-</script>
+
 <script type="text/javascript" src="./live2d/js/live2d.js"></script>
 <script type="text/javascript" src="./live2d/js/message.js"></script>
 <script type="text/javascript" src="./live2d/js/live2dLoad.js"></script>
 
-<script>
-    loadlive2d("live2d-model", "./live2d/model/miku/model.json");
-    var count = 0;
-    var modelList = ["Pio", "tia", "kesshouban_v2", "miku"];
 
-    function switchModel() {
-        count = (count + 1) % modelList.length;
-        var loadModel = modelList[count];
-        loadlive2d("live2d-model", "./live2d/model/" + loadModel + "/model.json");
-    }
-</script>
 
 </html>
