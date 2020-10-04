@@ -1,6 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AcFun Banner一览</title>
+    <url>/2020/10/04/AcFun%20Banner/</url>
+    <content><![CDATA[<p><a href="https://www.acfun.cn/a/ac1881444" target="_blank" rel="noopener">AcFun Banner</a></p>
+<p><a href="https://www.acfun.cn/a/ac15574934" target="_blank" rel="noopener">AcFun 13周年壁纸</a></p>
+]]></content>
+      <categories>
+        <category>AcFun</category>
+      </categories>
+      <tags>
+        <tag>banner</tag>
+        <tag>AC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS3选择器</title>
+    <url>/2020/10/04/CSS%E9%80%89%E6%8B%A9%E5%99%A8/</url>
+    <content><![CDATA[<h6 id="1-CSS3新增加的选择器："><a href="#1-CSS3新增加的选择器：" class="headerlink" title="1.CSS3新增加的选择器："></a>1.CSS3新增加的选择器：</h6><p>参考<a href="https://blog.csdn.net/w1418899532/article/details/89434136" target="_blank" rel="noopener">tomorrownan的博客</a>:css3新增选择器。</p>
+<h6 id="2-动态伪类选择器"><a href="#2-动态伪类选择器" class="headerlink" title="2.动态伪类选择器"></a>2.动态伪类选择器</h6><p>锚点伪类：<code>:link</code>，<code>:visited</code></p>
+<p>用户行为伪类：<code>:hover</code>,<code>active</code>,<code>:focus</code></p>
+<h6 id="3-属性选择器"><a href="#3-属性选择器" class="headerlink" title="3.属性选择器"></a>3.属性选择器</h6><table>
+<thead>
+<tr>
+<th align="center">选择器</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">E[attribute]</td>
+<td>选取带有指定属性的元素</td>
+</tr>
+<tr>
+<td align="center">E[attribute=value]</td>
+<td>选取带有指定属性和值的元素</td>
+</tr>
+<tr>
+<td align="center">E[attr^=“val”]</td>
+<td>匹配属性attr的值以指定值”val”开头的每个元素</td>
+</tr>
+<tr>
+<td align="center">E[attr$=“val”]</td>
+<td>匹配属性attr的值以指定值”val”结尾的元素</td>
+</tr>
+<tr>
+<td align="center">E[attr*=“val”]</td>
+<td>匹配属性attr的值包含字符串”val”元素</td>
+</tr>
+</tbody></table>
+<h6 id="3-UI元素状态伪类"><a href="#3-UI元素状态伪类" class="headerlink" title="3.UI元素状态伪类"></a>3.UI元素状态伪类</h6><p><code>:enabled</code>,<code>:disabled</code>,<code>:checked</code>.</p>
+<h6 id="4-结构伪类选择器"><a href="#4-结构伪类选择器" class="headerlink" title="4.结构伪类选择器"></a>4.结构伪类选择器</h6><p><code>Elemnet:nth-child(n)</code>等，其中n必须从1开始，odd表示奇数，even表示偶数。</p>
+<table>
+<thead>
+<tr>
+<th>选择</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:root</td>
+<td>选择匹配文档的根元素</td>
+</tr>
+<tr>
+<td>E:nth-child(n)</td>
+<td>选择所有在其父元素中的<strong>第n个</strong>位置的匹配E的子元素</td>
+</tr>
+<tr>
+<td>E:nth-last-child(n)</td>
+<td>选择所有在其父元素中<strong>倒数第n个</strong>位置的匹配E的子元素</td>
+</tr>
+<tr>
+<td>E:nth-of-type(n)</td>
+<td>选择所有在其父元素中<strong>同类型第n个</strong>位置的匹配E的子元素</td>
+</tr>
+<tr>
+<td>E:nth-last-of-type(n)</td>
+<td>选择所有在其父元素中<strong>同类型倒数第n个</strong>位置的匹配E的子元素</td>
+</tr>
+<tr>
+<td>E:last-child</td>
+<td>选择位于其父元素中最后一个位置，且匹配E的子元素 ，与E:nth-last-child(1)等同</td>
+</tr>
+<tr>
+<td>E:fisrt-child</td>
+<td>选择位于其父元素中第一个位置，且匹配E的子元素 ，与E:nth-child(1)等同</td>
+</tr>
+<tr>
+<td>E:first-of-type</td>
+<td>选择在其父元素中匹配E的第一个同类型子元素</td>
+</tr>
+<tr>
+<td>E:last-of-type</td>
+<td>选择在其父元素中匹配E的最后一个同类型子元素</td>
+</tr>
+<tr>
+<td>E:only-child</td>
+<td>选择在其父元素中只包含一个子元素，且该子元素匹配E。</td>
+</tr>
+<tr>
+<td>E:only-of-type</td>
+<td>选择在其父元素中只包含一个同类型子元素，且该子元素匹配E。</td>
+</tr>
+<tr>
+<td>E:empty</td>
+<td>选择匹配E的元素，且该元素不包含子元素。</td>
+</tr>
+</tbody></table>
+<h6 id="5-否定选择器"><a href="#5-否定选择器" class="headerlink" title="5.否定选择器"></a>5.否定选择器</h6><p><code>:not(Element/selector)</code>,选择器匹配非指定元素/选择器的每个元素。</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS3选择器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git的知识点</title>
     <url>/2020/09/26/Git%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
     <content><![CDATA[<p>可以查看张雪峰关于git的介绍，<a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">地址</a></p>
