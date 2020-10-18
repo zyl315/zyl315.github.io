@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Android学习笔记-字符串的加解密</title>
+    <url>/2020/10/18/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
+    <content><![CDATA[<center>Android学习笔记（一）</center>
+#### 要点
+
+<p>1、在存储密钥时，要在Android环境下调试，不然下面的代码会报<code>Not found &#39;AndroidKeyStore&#39;</code>,根本原因是在PC java环境下与Android下load的方式不同。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">KeyStore keyStore = KeyStore.getInstance(alias);</span><br><span class="line">keyStore.load(<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>2、如果要设置自己的初始向量IV，关闭自动生成随机初始向量IV，需要设置以下代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">setRandomizedEncryptionRequired(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+
+<p>自定义初始向量IV长度为12byte，即<code>iv = byte[12]</code></p>
+<p>3、在byte[] 与String不能够等价的转换，即装换是不可逆的，将一个byte数组转换为String后再转换为byte[]，两者等价了。因此在加密的时候使用了Base64来做转码功能。</p>
+<p>4、IV只支持<code>GCMParameterSpec iv = new GCMParameterSpec(128, sIv.getBytes(&quot;UTF-8&quot;));</code>生成的初始向量，使用别的会报错。</p>
+<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyl315.acfun.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Build;</span><br><span class="line"><span class="keyword">import</span> android.security.keystore.KeyGenParameterSpec;</span><br><span class="line"><span class="keyword">import</span> android.security.keystore.KeyProperties;</span><br><span class="line"><span class="keyword">import</span> android.util.Base64;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.security.KeyStore;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.crypto.Cipher;</span><br><span class="line"><span class="keyword">import</span> javax.crypto.KeyGenerator;</span><br><span class="line"><span class="keyword">import</span> javax.crypto.SecretKey;</span><br><span class="line"><span class="keyword">import</span> javax.crypto.spec.GCMParameterSpec;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.annotation.RequiresApi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EncryptTool</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String alias = <span class="string">"AndroidKeyStore"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String sIv = <span class="string">"qwertyuiopas"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@RequiresApi</span>(api = Build.VERSION_CODES.M)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encrypt</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//初始化一个使用AES加密的密钥生成器</span></span><br><span class="line">            <span class="keyword">final</span> KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES);</span><br><span class="line">            <span class="comment">//配置参数</span></span><br><span class="line">            <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.M) &#123;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//这里生成密钥的参数中设置了alias，生成密钥的时候会自动将这个密钥保存在KeyStore中</span></span><br><span class="line">                <span class="keyword">final</span> KeyGenParameterSpec keyGenParameterSpec =</span><br><span class="line">                        <span class="keyword">new</span> KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT)</span><br><span class="line">                                .setBlockModes(KeyProperties.BLOCK_MODE_GCM)</span><br><span class="line">                                .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)</span><br><span class="line">                                .setRandomizedEncryptionRequired(<span class="keyword">false</span>)<span class="comment">//自己设置初始向量IV</span></span><br><span class="line">                                .build();</span><br><span class="line">                <span class="comment">//用参数初始化密钥生成器</span></span><br><span class="line">                keyGenerator.init(keyGenParameterSpec);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//用密钥生成器产生密钥</span></span><br><span class="line">            <span class="keyword">final</span> SecretKey secretKey = keyGenerator.generateKey();</span><br><span class="line">            <span class="comment">//算法/模式/补码方式</span></span><br><span class="line">            <span class="keyword">final</span> Cipher cipher = Cipher.getInstance(<span class="string">"AES/GCM/NoPadding"</span>);</span><br><span class="line">            <span class="comment">//手动设置Initialization vector (IV)，解密需要这个iv</span></span><br><span class="line">            GCMParameterSpec iv = <span class="keyword">new</span> GCMParameterSpec(<span class="number">128</span>, sIv.getBytes(<span class="string">"UTF-8"</span>));</span><br><span class="line">            cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);</span><br><span class="line">            <span class="keyword">byte</span>[] encryption = cipher.doFinal(password.getBytes(<span class="string">"UTF-8"</span>));</span><br><span class="line">            <span class="comment">//加密完成，此处使用BASE64做转码功能，同时能起到2次加密的作用</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String(Base64.encode(encryption, Base64.DEFAULT),<span class="string">"UTF-8"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequiresApi</span>(api = Build.VERSION_CODES.M)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">decrypt</span><span class="params">(String encryption)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//使用Base64转码</span></span><br><span class="line">            <span class="keyword">byte</span>[] data = Base64.decode(encryption, Base64.DEFAULT);</span><br><span class="line">            <span class="comment">//获得keyStore</span></span><br><span class="line">            KeyStore keyStore = KeyStore.getInstance(alias);</span><br><span class="line">            keyStore.load(<span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">//从keystore中获取密钥Entry</span></span><br><span class="line">            <span class="keyword">final</span> KeyStore.SecretKeyEntry secretKeyEntry = (KeyStore.SecretKeyEntry) keyStore.getEntry(alias, <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">//从entry中获取AES密钥</span></span><br><span class="line">            <span class="keyword">final</span> SecretKey secretKey = secretKeyEntry.getSecretKey();</span><br><span class="line">            <span class="keyword">final</span> Cipher cipher = Cipher.getInstance(<span class="string">"AES/GCM/NoPadding"</span>);</span><br><span class="line">            <span class="keyword">final</span> GCMParameterSpec spec = <span class="keyword">new</span> GCMParameterSpec(<span class="number">128</span>, sIv.getBytes(<span class="string">"UTF-8"</span>));</span><br><span class="line">            cipher.init(Cipher.DECRYPT_MODE, secretKey, spec);</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">byte</span>[] decodedData = cipher.doFinal(data);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String(decodedData, <span class="string">"UTF-8"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附一张AC新的登录页面背景图，<img src= "/img/loading.gif" data-lazy-src="https://static.yximgs.com/udata/pkg/acfun/loginbg.be7a2d2876ab48ed.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>AES</tag>
+        <tag>keyStore</tag>
+        <tag>Cipher</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AcFun Banner一览</title>
     <url>/2020/10/04/AcFun%20Banner/</url>
     <content><![CDATA[<p><a href="https://www.acfun.cn/a/ac1881444" target="_blank" rel="noopener">AcFun Banner</a></p>
@@ -10,8 +38,8 @@
         <category>AcFun</category>
       </categories>
       <tags>
-        <tag>banner</tag>
         <tag>AC</tag>
+        <tag>banner</tag>
       </tags>
   </entry>
   <entry>
@@ -107,6 +135,10 @@
 </tr>
 </tbody></table>
 <h6 id="5-否定选择器"><a href="#5-否定选择器" class="headerlink" title="5.否定选择器"></a>5.否定选择器</h6><p><code>:not(Element/selector)</code>,选择器匹配非指定元素/选择器的每个元素。</p>
+<h6 id="6-伪元素"><a href="#6-伪元素" class="headerlink" title="6 伪元素"></a>6 伪元素</h6><p><code>::frist-line</code> 对Element元素中的<font color='red'>第一行文本</font>进行格式化，只能作用于块级元素。</p>
+<p><code>::frist-letter</code> 对Element元素中的<font color='red'>第一个字符</font>进行格式化，只能作用于块级元素。</p>
+<p><code>::before</code>  在元素的内容前面插入新的内容。</p>
+<p><code>::after</code> 在元素的内容后面插入新的内容。</p>
 ]]></content>
       <categories>
         <category>CSS</category>
