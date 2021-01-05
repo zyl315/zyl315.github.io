@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>$.ajax 报400错误</title>
-    <url>/2021/01/05/ajax%20%E6%8A%A5400%E9%94%99%E8%AF%AF%20/</url>
+    <url>/2021/01/05/ajax%E6%8A%A5400%E9%94%99%E8%AF%AF/</url>
     <content><![CDATA[<h1 id="ajax-报400错误"><a href="#ajax-报400错误" class="headerlink" title="$.ajax 报400错误"></a>$.ajax 报400错误</h1><p>今天在实际的项目中将jQuery的$.ajax请求方式由get改为post，发现报400错误；原因是由于contentType设置错误</p>
 <h6 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">contentType: &quot;application&#x2F;json;charset&#x3D;utf-8&quot;</span><br></pre></td></tr></table></figure>
 
