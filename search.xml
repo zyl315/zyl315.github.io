@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>$.ajax 报400错误</title>
+    <url>/2021/01/05/ajax%20%E6%8A%A5400%E9%94%99%E8%AF%AF%20/</url>
+    <content><![CDATA[<h1 id="ajax-报400错误"><a href="#ajax-报400错误" class="headerlink" title="$.ajax 报400错误"></a>$.ajax 报400错误</h1><p>今天在实际的项目中将jQuery的$.ajax请求方式由get改为post，发现报400错误；原因是由于contentType设置错误</p>
+<h6 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">contentType: &quot;application&#x2F;json;charset&#x3D;utf-8&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">contentType: &quot;application&#x2F;x-www-form-urlencoded;charset&#x3D;UTF-8&quot;</span><br></pre></td></tr></table></figure>
+
+<p>默认不设置也没问题</p>
+<h6 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h6><p>java后端<code>@RequestMapping</code>的<code>Method</code>保持默认设置即可，可接受<code>GET、POST、PUT、DELETE</code>等请求。</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>ajax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RxAndroid学习</title>
+    <url>/2020/10/31/RxAndroid/</url>
+    <content><![CDATA[<h3 id="RxAndroid-入门学习"><a href="#RxAndroid-入门学习" class="headerlink" title="RxAndroid 入门学习"></a>RxAndroid 入门学习</h3><blockquote>
+<p>参考<a href="https://www.jianshu.com/p/5d761e283f24" target="_blank" rel="noopener">RxAndroid入门</a></p>
+</blockquote>
+<h4 id="1、响应式编程"><a href="#1、响应式编程" class="headerlink" title="1、响应式编程"></a>1、响应式编程</h4><p>具体的在上面的参考文献中说的已经非常清楚了，个人理解就是化繁为简，将多层次的嵌套变成流水式，是的代码更加清晰易读。</p>
+<h4 id="2、Android怎么用"><a href="#2、Android怎么用" class="headerlink" title="2、Android怎么用"></a>2、Android怎么用</h4><p>使用RxAndroid添加如下依赖：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        maven &#123; url &quot;https:&#x2F;&#x2F;oss.jfrog.org&#x2F;libs-snapshot&quot; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation &#39;io.reactivex.rxjava3:rxandroid:3.0.0&#39;</span><br><span class="line">    implementation &#39;io.reactivex.rxjava3:rxjava:3.0.0&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>最新的依赖以及源码可以访问RxAndroid GitHub<a href="https://github.com/ReactiveX/RxAndroid" target="_blank" rel="noopener">主页</a></p>
+</blockquote>
+<h5 id="Observable和Observe"><a href="#Observable和Observe" class="headerlink" title="Observable和Observe"></a>Observable和Observe</h5><p>非常典型的观察者模式：</p>
+<p>​    Observable：被观察者，用来处理事件的派发；</p>
+<p>​    Observe：观察者，关注Observable，当被Observable发生变化时，Observe可以迅速的做出响应，处理事务，Observable可以对应多个Observe。</p>
+<p>具体代码可以参考开头。</p>
+<p><code>Observable</code>相关的对象和方法：</p>
+<ol>
+<li><p>使用<code>Observable.create</code>创建<code>Observable</code>对象。</p>
+</li>
+<li><p><code>ObservableEmitter</code>为发射器，<code>Observable</code>使用它发射事件给所有<code>Observer</code>。</p>
+</li>
+<li><p>使用<code>Observable.subscribe</code>添加一个<code>Observer</code>。</p>
+</li>
+</ol>
+<p><code>Observer</code>的几个方法：</p>
+<ol>
+<li>onSubscribe：在订阅<code>observable</code>时回调，可以在这里调用<code>Disposable.dispose</code>取消订阅或者将<code>Disposable</code>对象保存起来以便在后续某个时刻取消订阅。</li>
+<li>onNext：在<code>ObservableEmitter.onNext</code>执行后回调，<code>onNext</code>表示的是整个响应链中的一环，在这里处理响应链中的其中一个任务，可以多次调用。</li>
+<li>onComplete：在<code>ObservableEmitter.onComplete</code>执行后回调，表示任务已全部完成，可以在这里做收尾工作。</li>
+<li>onError：在<code>ObservableEmitter.onError</code>执行后或者链中任一环节出现异常时回调，表示任务执行失败。</li>
+</ol>
+<p>特别的是Observable订阅Observe，即被观察者订阅观察者。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>RxAndroid</tag>
+        <tag>RxJava</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android学习笔记-字符串的加解密</title>
     <url>/2020/10/18/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
     <content><![CDATA[<center>Android学习笔记（一）</center>
