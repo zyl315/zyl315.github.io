@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>安卓学习-kotlin语言学习</title>
+    <url>/2021/03/04/Kotlin%E5%AD%A6%E4%B9%A01/</url>
+    <content><![CDATA[<h4 id="Kotlin基本"><a href="#Kotlin基本" class="headerlink" title="Kotlin基本"></a>Kotlin基本</h4><h5 id="1、继承与构造函数"><a href="#1、继承与构造函数" class="headerlink" title="1、继承与构造函数"></a>1、继承与构造函数</h5><p>Kotlin中默认类不可以被继承，使用<code>open</code>关键字之后才可以被继承。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类继承父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Studen</span> : <span class="type">Person</span></span>() &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Kotlin将构造函数分成了两种：主构造函数和次构造函数。</p>
+<p>Kotlin规定，当一个类既有主构造函数又有次构造函数时，所有的次构造函数都必须调用主构造函数（包括间接调用）</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">val</span> name:String, <span class="keyword">val</span> age: <span class="built_in">Int</span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 带参数的主构造函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>(<span class="keyword">val</span> sno: String, <span class="keyword">val</span> grade: <span class="built_in">Int</span>, name, age) : Person(name, age) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 次构造函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>(<span class="keyword">val</span> sno: String, <span class="keyword">val</span> grade: <span class="built_in">Int</span>, name, age) : Person(name, age) &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name:String, age:<span class="built_in">Int</span>) : <span class="keyword">this</span>(<span class="string">""</span>,<span class="number">0</span>, name, age)<span class="comment">//this关键字调用了主构造函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、接口"><a href="#2、接口" class="headerlink" title="2、接口"></a>2、接口</h5><p>Kotlin中的接口与java类似，Kotlin允许对接口中定义的函数进行默认实现（Java 8后开始支持。</p>
+<h5 id="3、数据类与单例类"><a href="#3、数据类与单例类" class="headerlink" title="3、数据类与单例类"></a>3、数据类与单例类</h5><p>数据类关键字<code>data</code>，Kotlin将Java中<code>equals()、hashCode()、toString()</code>等固定且无实际逻辑意义的方法自动生成。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>单例类，使用关键字<code>object</code>即可。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">object</span> Singleton&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Lambda基本"><a href="#Lambda基本" class="headerlink" title="Lambda基本"></a>Lambda基本</h4><h5 id="1-List-Set-Map的构建"><a href="#1-List-Set-Map的构建" class="headerlink" title="1  List, Set, Map的构建"></a>1  List, Set, Map的构建</h5><p>Kotlin可以采取Java的方式创建，也可以使用函数来创建</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> list = ArrayList&lt;String&gt;()</span><br><span class="line">list.add(<span class="string">"Apple"</span>)</span><br><span class="line">list.add(<span class="string">"Banana"</span>)</span><br><span class="line">list.add(<span class="string">"Orange"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态列表创建</span></span><br><span class="line"><span class="keyword">val</span> list = listOf(<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"pear"</span>)</span><br><span class="line"><span class="comment">// 动态列表创建</span></span><br><span class="line"><span class="keyword">val</span> list = mutableListOf(<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"pear"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态集合创建</span></span><br><span class="line"><span class="keyword">val</span> list = setOf(<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"pear"</span>)</span><br><span class="line"><span class="comment">// 动态集合创建</span></span><br><span class="line"><span class="keyword">val</span> list = mutableSetOf(<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"pear"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态Map创建</span></span><br><span class="line"><span class="keyword">val</span> list = mapOf(<span class="string">"apple"</span> to <span class="number">1</span>, <span class="string">"banana"</span> to <span class="number">2</span>, <span class="string">"pear"</span> to <span class="number">3</span>)</span><br><span class="line"><span class="comment">// 动态Map创建</span></span><br><span class="line"><span class="keyword">val</span> list = mutableMapOf(<span class="string">"apple"</span> to <span class="number">1</span>, <span class="string">"banana"</span> to <span class="number">2</span>, <span class="string">"pear"</span> to <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-集合的函数式API"><a href="#2-集合的函数式API" class="headerlink" title="2  集合的函数式API"></a>2  集合的函数式API</h5><p>Lambda表达式的语法结构：{参数名1: 参数类型, 参数名2: 参数类型 -&gt; 函数体}</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 水果集合里面找到单词最长的那个水果</span></span><br><span class="line"><span class="keyword">val</span> list = listOf(<span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Pear"</span>, <span class="string">"Grape"</span>, <span class="string">"Watermelon"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> maxLengthFruit = list.maxBy(&#123; fruit: String -&gt; fruit.length &#125;)</span><br><span class="line"><span class="comment">// 当Lambda参数是函数的最后一个参数时，可以将Lambda表达式移到函数括号的外面</span></span><br><span class="line"><span class="keyword">val</span> maxLengthFruit = list.maxBy() &#123; fruit: String -&gt; fruit.length &#125;</span><br><span class="line"><span class="comment">// 如果Lambda参数是函数的唯一一个参数的话，还可以将函数的括号省略：</span></span><br><span class="line"><span class="keyword">val</span> maxLengthFruit = list.maxBy &#123; it.length &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>list</code>还有更多函数式API，例如<code>.filter .map .any .all</code></p>
+<h5 id="3-Java函数式API的使用"><a href="#3-Java函数式API的使用" class="headerlink" title="3 Java函数式API的使用"></a>3 Java函数式API的使用</h5><p>以android中的button为例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// java</span></span><br><span class="line">button.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// java Lambda</span></span><br><span class="line">button.setOnClickListener(view-&gt;&#123;&#125;);</span><br><span class="line"><span class="comment">//kotlin Lambda</span></span><br><span class="line">button.setOnClickListener &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-空指针检查"><a href="#4-空指针检查" class="headerlink" title="4 空指针检查"></a>4 空指针检查</h5><p>Kotlin默认所有的参数和变量都不可为空，可以声明为空，在类名的后面加上？<code>Int? String?</code> 然后要把空指针异常都处理掉。</p>
+<p>判空辅助工具 <code>？.</code> 和<code>?:</code></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (a != <span class="literal">null</span>) &#123;a.doSomething()&#125;</span><br><span class="line"><span class="comment">//等价于</span></span><br><span class="line">a?.doSometing()</span><br><span class="line"><span class="keyword">val</span> c = <span class="keyword">if</span> (a ! = <span class="literal">null</span>) &#123; a &#125; <span class="keyword">else</span> &#123; b &#125;</span><br><span class="line"><span class="comment">//等价于</span></span><br><span class="line"><span class="keyword">val</span> c = a ?: b</span><br></pre></td></tr></table></figure>
+
+<p><code>let</code>函数，let函数属于Kotlin中的标准函数</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">obj.let &#123; obj2 -&gt; obj2.doSomething() &#125;</span><br><span class="line"><span class="comment">// Lambda </span></span><br><span class="line">obj.let &#123; it.doSometing() &#125;</span><br><span class="line"><span class="comment">// obj判null</span></span><br><span class="line">obj?.let &#123; it.doSomething() &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Kotlin中的实用小技巧"><a href="#Kotlin中的实用小技巧" class="headerlink" title="Kotlin中的实用小技巧"></a>Kotlin中的实用小技巧</h4><h5 id="字符串内嵌表达式"><a href="#字符串内嵌表达式" class="headerlink" title="字符串内嵌表达式"></a>字符串内嵌表达式</h5><p>与JavaScript中类似</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="string">"hello, <span class="subst">$&#123;obj.name&#125;</span>. kotlin!"</span></span><br><span class="line"><span class="comment">// 表达式中仅有一个变量的时候，还可以将两边的大括号省略</span></span><br><span class="line"><span class="string">"hello, <span class="variable">$name</span>. kotlin"</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>kotlin, Lambda</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>$.ajax 报400错误</title>
     <url>/2021/01/05/ajax%E6%8A%A5400%E9%94%99%E8%AF%AF/</url>
     <content><![CDATA[<h1 id="ajax-报400错误"><a href="#ajax-报400错误" class="headerlink" title="$.ajax 报400错误"></a>$.ajax 报400错误</h1><p>今天在实际的项目中将jQuery的$.ajax请求方式由get改为post，发现报400错误；原因是由于contentType设置错误</p>
@@ -292,8 +337,8 @@
         <category>版本控制工具</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>命令</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
