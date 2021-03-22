@@ -1,8 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>安卓学习-kotlin语言学习</title>
-    <url>/2021/03/04/Kotlin%E5%AD%A6%E4%B9%A01/</url>
+    <title>Android学习之kotlin （四）</title>
+    <url>/2021/03/16/Kotlin/Kotlin%E5%AD%A6%E4%B9%A0%E5%9B%9B/</url>
+    <content><![CDATA[<h4 id="Kotlin高阶函数"><a href="#Kotlin高阶函数" class="headerlink" title="Kotlin高阶函数"></a>Kotlin高阶函数</h4><p>此Kotlin支持多种方式来调用高阶函数，比如另一个函数、Lambda表达式、匿名函数、成员引用等。其中，Lambda表达式是最常见也是最普遍的高阶函数调用方式</p>
+<h5 id="1-定义高阶函数"><a href="#1-定义高阶函数" class="headerlink" title="1 定义高阶函数"></a>1 定义高阶函数</h5><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">plus</span><span class="params">(num1: <span class="type">Int</span>, num2: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">minus</span><span class="params">(num1: <span class="type">Int</span>, num2: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> num1 - num2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">num1AndNum2</span><span class="params">(num1: <span class="type">Int</span>, num2: <span class="type">Int</span>, operation: (<span class="type">Int</span>, <span class="type">Int</span>) -&gt; <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">	<span class="keyword">val</span> result = operation(num1, num2)</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">val</span> num1 = <span class="number">100</span></span><br><span class="line">	<span class="keyword">val</span> num2 = <span class="number">80</span></span><br><span class="line">	<span class="keyword">val</span> result1 = num1AndNum2(num1, num2, ::plus)</span><br><span class="line">	<span class="keyword">val</span> result2 = num1AndNum2(num1, num2, ::minus)</span><br><span class="line">	println(<span class="string">"result1 is <span class="variable">$result1</span>"</span>)</span><br><span class="line">	println(<span class="string">"result2 is <span class="variable">$result2</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这里调用num1AndNum2()函数的方式，第三个参数使用了::plus和::minus这种写法。这是一种函数引用方式的写法，表示将plus()和minus()函数作为参数传递给num1AndNum2()函数。</p>
+<p>上述代码如果使用Lambda表达式的写法来实现的话，代码如下所示：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">val</span> num1 = <span class="number">100</span></span><br><span class="line">	<span class="keyword">val</span> num2 = <span class="number">80</span></span><br><span class="line">	<span class="keyword">val</span> result1 = num1AndNum2(num1, num2) &#123; n1, n2 -&gt;</span><br><span class="line">		n1 + n2</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">val</span> result2 = num1AndNum2(num1, num2) &#123; n1, n2 -&gt;</span><br><span class="line">		n1 - n2</span><br><span class="line">	&#125;</span><br><span class="line">	println(<span class="string">"result1 is <span class="variable">$result1</span>"</span>)</span><br><span class="line">	println(<span class="string">"result2 is <span class="variable">$result2</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-内联函数"><a href="#2-内联函数" class="headerlink" title="2 内联函数"></a>2 内联函数</h5><p>内联函数的用法非常简单，只需要在定义高阶函数时加上inline关键字的声明即可，如下所示：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="title">num1AndNum2</span><span class="params">(num1: <span class="type">Int</span>, num2: <span class="type">Int</span>, operation: (<span class="type">Int</span>, <span class="type">Int</span>) -&gt; <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">	<span class="keyword">val</span> result = operation(num1, num2)</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>内联函数的工作原理是是Kotlin编译器会将内联函数中的代码在编译的时候自动替换到调用它的地方，这样也就不存在运行时的开销了。</p>
+<h5 id="3-noinline与crossinline"><a href="#3-noinline与crossinline" class="headerlink" title="3 noinline与crossinline"></a>3 noinline与crossinline</h5><p>一个高阶函数中如果接收了两个或者更多函数类型的参数，这时我们给函数加上了inline关键字，那么Kotlin编译器会自动将所有引用的Lambda表达式全部进行内联。</p>
+<p>只想内联其中的一个Lambda表达式,使用noinline关键字了，如下所示：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="title">inlineTest</span><span class="params">(block1: () -&gt; <span class="type">Unit</span>, <span class="keyword">noinline</span> block2: () -&gt; <span class="type">Unit</span>)</span></span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>非内联的函数类型参数可以自由地传递给其他任何函数，因为它就是一个真实的参数，而内联的函数类型参数只允许传递给另外一个内联函数，这也是它最大的局限性。另外，内联函数和非内联函数还有一个重要的区别，那就是内联函数所引用的Lambda表达式中是可以使用return关键字来进行函数返回的，而非内联函数只能进行局部返回。</p>
+<p>在高阶函数中创建了另外的Lambda或者匿名类的实现，并且在这些实现中调用函数类型参数，此时再将高阶函数声明成内联函数，就一定会提示错误。crossinline关键字就像一个契约，它用于保证在内联函数的Lambda表达式中一定不会使用return关键字。</p>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>kotlin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android学习之kotlin （三）</title>
+    <url>/2021/03/16/Kotlin/Kotlin%E5%AD%A6%E4%B9%A0%E4%B8%89/</url>
+    <content><![CDATA[<h4 id="Kotlin扩展函数和运算符重载"><a href="#Kotlin扩展函数和运算符重载" class="headerlink" title="Kotlin扩展函数和运算符重载"></a>Kotlin扩展函数和运算符重载</h4><h5 id="1-扩展函数"><a href="#1-扩展函数" class="headerlink" title="1 扩展函数"></a>1 扩展函数</h5><p>扩展函数表示即使在不修改某个类的源码的情况下，仍然可以打开这个类，向该类添加新的函数。</p>
+<p>定义扩展函数只需要在函数名的前面加上一个ClassName.的语法结构，就表示将该函数添加到指定类当中了。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> ClassName.<span class="title">methodName</span><span class="params">(param1: <span class="type">Int</span>, param2: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-运算符重载"><a href="#2-运算符重载" class="headerlink" title="2 运算符重载"></a>2 运算符重载</h5><p>符重载使用的是operator关键字，只要在指定函数的前面加上operator关键字，就可以实现运算符重载的功能了。</p>
+<p>以加号运算符为例，如果想要实现让两个对象相加的功能，那么它的语法结构如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Obj</span> </span>&#123;</span><br><span class="line">	<span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">plus</span><span class="params">(obj: <span class="type">Obj</span>)</span></span>: Obj &#123;</span><br><span class="line">		<span class="comment">// 处理相加的逻辑 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现字符串的连乘， 定义为顶层函数：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> String.<span class="title">times</span><span class="params">(n : <span class="type">Int</span>)</span></span>: String &#123;</span><br><span class="line">    <span class="keyword">val</span> builder = StringBuilder()</span><br><span class="line">	repeat(n) &#123;</span><br><span class="line">        builder.append(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> builder.toString()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"abc"</span> * <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>kotlin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android学习之kotlin （二）</title>
+    <url>/2021/03/10/Kotlin/Kotlin%E5%AD%A6%E4%B9%A0%E4%BA%8C/</url>
+    <content><![CDATA[<h3 id="Kotlin标准函数和静态方法"><a href="#Kotlin标准函数和静态方法" class="headerlink" title="Kotlin标准函数和静态方法"></a>Kotlin标准函数和静态方法</h3><h5 id="1-标准函数with、run和apply"><a href="#1-标准函数with、run和apply" class="headerlink" title="1 标准函数with、run和apply"></a>1 标准函数with、run和apply</h5><h6 id="with函数"><a href="#with函数" class="headerlink" title="with函数"></a><strong>with</strong>函数</h6><p>接收两个参数：第一个参数可以是一个任意类型的对象，第二个参数是一个Lambda表达式。with函数会在Lambda表达式中提供第一个参数对象的上下文，并使用Lambda表达式中的最后一行代码作为返回值返回</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> result = with(obj) &#123;</span><br><span class="line">	<span class="comment">// 这里是obj的上下文</span></span><br><span class="line">	<span class="string">"value"</span> <span class="comment">// with函数的返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="run函数"><a href="#run函数" class="headerlink" title="run函数"></a>run函数</h6><p>的用法和使用场景其实和with函数是非常类似的，只是稍微做了一些语法改动而已。首先run函数通常不会直接调用，而是要在某个对象的基础上调用；其次run函数只接收一个Lambda参数，并且会在Lambda表达式中提供调用对象的上下文。其他方面和with函数是一样的，包括也会使用Lambda表达式中的最后一行代码作为返回值返回</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> result = obj.run &#123;</span><br><span class="line">	<span class="comment">// 这里是obj的上下文</span></span><br><span class="line">	<span class="string">"value"</span> <span class="comment">// run函数的返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="apply函数"><a href="#apply函数" class="headerlink" title="apply函数"></a>apply函数</h6><p>和run函数也是极其类似的，都要在某个对象上调用，并且只接收一个Lambda参数，也会在Lambda表达式中提供调用对象的上下文，但是apply函数无法指定返回值，而是会自动返回调用对象本身</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> result = obj.apply &#123;</span><br><span class="line">	<span class="comment">// 这里是obj的上下文</span></span><br><span class="line">&#125; <span class="comment">// result == obj</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-静态方法"><a href="#2-静态方法" class="headerlink" title="2 静态方法"></a>2 静态方法</h5><h6 id="单例类"><a href="#单例类" class="headerlink" title="单例类"></a>单例类</h6><p>静态方法在某些编程语言里面又叫作类方法，指的就是那种不需要创建实例就能调用的方法，所有主流的编程语言都会支持静态方法这个特性。为Kotlin提供了比静态方法更好用的语法特性——单例类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Util</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">doAction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"do action"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// kotlin</span></span><br><span class="line">object Util &#123;</span><br><span class="line">	<span class="function">fun <span class="title">doAction</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		println(<span class="string">"do action"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="伴随类"><a href="#伴随类" class="headerlink" title="伴随类"></a>伴随类</h6><p>希望让类中的某一个方法变成静态方法, 使用伴随对象</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Util</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">fun</span> <span class="title">doAction1</span><span class="params">()</span></span> &#123;</span><br><span class="line">		println(<span class="string">"do action1"</span>)</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">		<span class="function"><span class="keyword">fun</span> <span class="title">doAction2</span><span class="params">()</span></span> &#123;</span><br><span class="line">			println(<span class="string">"do action2"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="注解和顶层方法"><a href="#注解和顶层方法" class="headerlink" title="注解和顶层方法"></a>注解和顶层方法</h6><p>确实需要定义真正的静态方法， Kotlin仍然提供了两种实现方式：注解和顶层方法。</p>
+<p><strong>注解</strong></p>
+<p>给单例类或companion object中的方法加上@JvmStatic注解，那么Kotlin编译器就会将这些方法编译成真正的静态方法</p>
+<p><strong>顶层方法</strong></p>
+<p>指那些没有定义在任何类中的方法，例如：<code>main()</code>方法。在Kotlin中所有的顶层方法都可以在任何位置被直接调用，不用管包名路径，也不用创建实例。在Java中使用文件名加方法调用。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Kt文件 Helper.kt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">doSomething</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Kotlin中调用</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    doSomething()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Java调用</span></span><br><span class="line"><span class="keyword">public</span> static void main(String args[]) &#123;</span><br><span class="line">	HelperKt.doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>kotlin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android学习之Activity</title>
+    <url>/2021/03/10/android/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C(Activity)/</url>
+    <content><![CDATA[<h5 id="1-Activity-的启动模式"><a href="#1-Activity-的启动模式" class="headerlink" title="1 Activity 的启动模式"></a>1 Activity 的启动模式</h5><p>启动模式一共有4种，分别是standard、singleTop、singleTask和singleInstance，可以在|AndroidManifest.xml中通过给<activity>标签指定，android: launchMode属性来选择启动模式</p>
+<h6 id="1-1-standard"><a href="#1-1-standard" class="headerlink" title="1.1 standard"></a>1.1 standard</h6><p> Activity默认的启动模式，在不进行显式指定的情况下，所有Activity都会自动使用这种启动模式。</p>
+<h6 id="1-2-singleTop"><a href="#1-2-singleTop" class="headerlink" title="1.2 singleTop"></a>1.2 singleTop</h6><p>在启动Activity时如果发现返回栈的栈顶已经是该Activity，则认为可以直接使用它，不会再创建新的Activity实例。不过当Activity并未处于栈顶位置时，再启动Activity还是会创建新的实例的。</p>
+<h6 id="1-3-singleTask"><a href="#1-3-singleTask" class="headerlink" title="1.3 singleTask"></a>1.3 singleTask</h6><p>每次启动该Activity时，系统首先会在返回栈中检查是否存在该Activity的实例，如果发现已经存在则直接使用该实例，并把在这个Activity之上的所有其他Activity统统出栈，如果没有发现就会创建一个新的Activity实例。</p>
+<h6 id="1-4-singleInstance"><a href="#1-4-singleInstance" class="headerlink" title="1.4 singleInstance"></a>1.4 singleInstance</h6><p>有一个单独的返回栈来管理这个Activity，不管是哪个应用程序来访问这个Activity，都共用同一个返回栈，也就解决了共享Activity实例的问题。（如果singleTask模式指定了不同的taskAffinity，也会启动一个新的返回栈）</p>
+<h5 id="2-创建BaseActivity类"><a href="#2-创建BaseActivity类" class="headerlink" title="2 创建BaseActivity类"></a>2 创建BaseActivity类</h5><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">		Log.d(<span class="string">"BaseActivity"</span>, javaClass.simpleName)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其它类在继承BaseActivity类，可以在BaseActivity实现一些共有的方法。</p>
+<h5 id="3-创建Activity管理工具"><a href="#3-创建Activity管理工具" class="headerlink" title="3 创建Activity管理工具"></a>3 创建Activity管理工具</h5><p>新建一个单例类ActivityCollector作为Activity的集合</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">object</span> ActivityCollector &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> activities = ArrayList&lt;Activity&gt;()    </span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">addActivity</span><span class="params">(activity: <span class="type">Activity</span>)</span></span> &#123;</span><br><span class="line">        activities.add(activity)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">removeActivity</span><span class="params">(activity: <span class="type">Activity</span>)</span></span> &#123;</span><br><span class="line">        activities.remove(activity)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">finishAll</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (activity <span class="keyword">in</span> activities) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!activity.isFinishing) &#123;</span><br><span class="line">                activity.finish()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; activities . clear ()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="4-优雅的启动Activity"><a href="#4-优雅的启动Activity" class="headerlink" title="4 优雅的启动Activity"></a>4 优雅的启动Activity</h6><p>使用Kotlin的伴随对象来传递Activity需要传递的参数，在companion object中的方法都可以使用类似于Java静态方法的形式调用</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SecondActivity</span> : <span class="type">BaseActivity</span></span>() &#123;</span><br><span class="line">...</span><br><span class="line">	<span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">		<span class="function"><span class="keyword">fun</span> <span class="title">actionStart</span><span class="params">(context: <span class="type">Context</span>, data1: <span class="type">String</span>, data2: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">			<span class="keyword">val</span> intent = Intent(context, SecondActivity::<span class="class"><span class="keyword">class</span>.<span class="title">java</span>)</span></span><br><span class="line">			intent.putExtra(<span class="string">"param1"</span>, data1)</span><br><span class="line">			intent.putExtra(<span class="string">"param2"</span>, data2)</span><br><span class="line">			context.startActivity(intent)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>activity, kotlin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android学习之kotlin （一）</title>
+    <url>/2021/03/04/Kotlin/Kotlin%E5%AD%A6%E4%B9%A0%E4%B8%80/</url>
     <content><![CDATA[<h4 id="Kotlin基本"><a href="#Kotlin基本" class="headerlink" title="Kotlin基本"></a>Kotlin基本</h4><h5 id="1、继承与构造函数"><a href="#1、继承与构造函数" class="headerlink" title="1、继承与构造函数"></a>1、继承与构造函数</h5><p>Kotlin中默认类不可以被继承，使用<code>open</code>关键字之后才可以被继承。</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父类</span></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类继承父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Studen</span> : <span class="type">Person</span></span>() &#123;&#125;</span><br></pre></td></tr></table></figure>
 
@@ -65,7 +173,7 @@
   </entry>
   <entry>
     <title>RxAndroid学习</title>
-    <url>/2020/10/31/RxAndroid/</url>
+    <url>/2020/10/31/android/RxAndroid/</url>
     <content><![CDATA[<h3 id="RxAndroid-入门学习"><a href="#RxAndroid-入门学习" class="headerlink" title="RxAndroid 入门学习"></a>RxAndroid 入门学习</h3><blockquote>
 <p>参考<a href="https://www.jianshu.com/p/5d761e283f24" target="_blank" rel="noopener">RxAndroid入门</a></p>
 </blockquote>
@@ -99,7 +207,7 @@
 <p>特别的是Observable订阅Observe，即被观察者订阅观察者。</p>
 ]]></content>
       <categories>
-        <category>Android</category>
+        <category>android</category>
       </categories>
       <tags>
         <tag>RxAndroid</tag>
@@ -108,7 +216,7 @@
   </entry>
   <entry>
     <title>Android学习笔记-字符串的加解密</title>
-    <url>/2020/10/18/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
+    <url>/2020/10/18/android/Android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
     <content><![CDATA[<center>Android学习笔记（一）</center>
 #### 要点
 
@@ -337,8 +445,8 @@
         <category>版本控制工具</category>
       </categories>
       <tags>
-        <tag>命令</tag>
         <tag>Git</tag>
+        <tag>命令</tag>
       </tags>
   </entry>
   <entry>
